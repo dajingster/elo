@@ -1,7 +1,6 @@
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from datetime import datetime, date
-from pytz import timezone
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
