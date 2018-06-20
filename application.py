@@ -163,7 +163,6 @@ def player():
                     name, rating = info[0].split(":")
                     name = name.strip()
                     rating = rating.strip()
-                    break
                 except (ValueError, TypeError, NameError, RuntimeError):
                     return apology("Wrong new player format", 403)
 
