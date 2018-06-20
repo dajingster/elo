@@ -59,5 +59,5 @@ def New_Elo(player_a, player_b, result):
 	return_values.append(current_a + (K_a*a_multiplier) * (result - expected_a))
 	return_values.append((float(player_a[2])*ac_index + (1 - abs(result - expected_a))**(a_multiplier))/(ac_index + 1))
 	return_values.append(current_b + (K_b*b_multiplier) * (1 - result - expected_b))
-	return_values.append((float(player_b[2])*bc_index + (1 - abs(result - expected_b))**(b_multiplier))/(bc_index + 1))
+	return_values.append((float(player_b[2])*bc_index + (1 - abs(1 - result - expected_b))**(b_multiplier))/(bc_index + 1))
 	return return_values
