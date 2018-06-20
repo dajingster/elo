@@ -5,6 +5,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
+import os 
 
 from helpers import apology, login_required
 from elo import New_Elo, standard_probability
@@ -162,7 +163,6 @@ def player():
                     name, rating = info[0].split(":")
                     name = name.strip()
                     rating = rating.strip()
-                    break
                 except (ValueError, TypeError, NameError, RuntimeError):
                     return apology("Wrong new player format", 403)
 
@@ -585,3 +585,8 @@ def errorhandler(e):
 # listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
+
+    
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
