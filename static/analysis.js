@@ -101,11 +101,15 @@ function consistency() {
 
 	var points = [];
 
+	console.log(progress);
+
 	for (i = 0; i < progress.length/3; i++) {
 		point = parseInt(progress[i*3 + 2])
+		console.log(point)
 		x = 100 - point*22/7
-		y = 5 + 92*(progress[i*3 + 1]/100 - lowest/100)/lines
+		y = 100*(1 - progress[i*3 + 1])
 		points.push([x, y]);
+		console.log(points)
 		document.getElementById("data").innerHTML += '<g class="data" data-setname=""> <circle cx=\"' + x + '%" cy=\"' + y + '%" r="4"></circle>';
 	}
 
