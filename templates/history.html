@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" id="search" placeholder="Search" type="text"/>
+    </div>
+
+    <br>
+    <div id = "checkbox">
+        <input type="checkbox" id="check">
+        In-Depth
+    </div>
+    <table class="table" id = "history_table">
+        <thead>
+            <tr>
+                <th>
+                    Game ({{counter}})
+                </th>
+                <th>
+                    Player One
+                </th>
+                <th>
+                    Rating &#916
+                </th>
+                <th>
+                    New Rating
+                </th>
+                <th>
+                    Consistency
+                </th>
+                <th>
+                    Player Two
+                </th>
+                <th>
+                    Rating &#916
+                </th>
+                <th>
+                    New Rating
+                </th>
+                <th>
+                    Consistency
+                </th>
+                <th>
+                    Result
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in history_table %}
+            {% set outer_loop = loop %}
+            <tr>
+                <td>
+                    {{counter - (loop.index - 1)}}
+                </td>
+                {% for info in game %}
+                    <td>
+                        {{history_table[outer_loop.index0][loop.index0]}}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src = "../static/history.js"></script>
+{% endblock %}

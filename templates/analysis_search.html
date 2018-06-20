@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Analysis Search
+{% endblock %}
+
+{% block main %}
+    <form action="/analysis_search" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="player_name" placeholder="Name" type="text"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+{% endblock %}

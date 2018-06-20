@@ -1,0 +1,720 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Analysis
+{% endblock %}
+
+{% block head %}
+
+		<style>
+		    /*#analytics {*/
+		    /*    border: 0.3em solid black;*/
+		    /*}*/
+
+
+            #profile {
+			    /*border: 0.1em solid #ffa500;*/
+			    height: 2em;
+			    font-size: 1.3em;
+			    left: 30%;
+			    position: static;
+			   	top: 15%;
+                padding-right: 0.3em;
+                padding-left: 0.3em;
+			}
+
+
+			#rating {
+			    /*border: 0.1em solid #ffa500;*/
+			    height: 2em;
+                padding-right: 0.3em;
+                padding-left: 0.3em;
+			    font-size: 1.3em;
+			    text-align: center;
+			    position: static;
+				top: 15%;
+				/*left: 45%;*/
+			}
+
+			#consistency {
+			    /*border: 0.1em solid #ffa500;*/
+			    height: 2em;
+                padding-right: 0.3em;
+                padding-left: 0.3em;
+			    font-size: 1.3em;
+			    /*right: 10%;*/
+			    position: static;
+				top: 15%;
+			}
+			.header {
+			    width: 1vw;
+			}
+
+			#big_rating {
+                color: black;
+                font-weight: 600;
+                font-size: 4.5em;
+                background-color: white;
+                left: 5%;
+                top: 30%;
+                position: absolute;
+			}
+
+			#big_con {
+                color: black;
+                font-weight: 600;
+                font-size: 4.5em;
+                background-color: white;
+                left: 5%;
+                top: 30%;
+                position: absolute;
+			}
+
+			#big_prof_r {
+                color: black;
+                font-weight: 600;
+                font-size: 4.5em;
+                background-color: white;
+                left: 5%;
+                top: 30%;
+                position: absolute;
+			}
+
+			#big_prof_c {
+                color: black;
+                font-weight: 600;
+                font-size: 4.5em;
+                background-color: white;
+                left: 5%;
+                top: 45%;
+                position: absolute;
+			}
+
+			#stats {
+                top: 35%;
+                position: absolute;
+                left: 5%;
+                font-size: 2em;
+			}
+			#c_stats {
+                top: 35%;
+                position: absolute;
+                left: 5%;
+                font-size: 2em;
+			}
+
+            .graph .labels.x-labels {
+            text-anchor: middle;
+            }
+
+            .graph .labels.y-labels {
+            text-anchor: end;
+            }
+
+
+
+            .graph {
+            height: 100%;
+            width: 100%;
+            }
+
+            .graph .grid {
+            stroke: #ccc;
+            stroke-dasharray: 0;
+            stroke-width: 8;
+            }
+
+            .labels {
+            font-size: 13px;
+            }
+
+            .label-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            fill: black;
+            }
+
+            .data {
+            fill: #FFC760;
+            stroke-width: 1;
+            }
+
+            #lines {
+            stroke: #ccc;
+            stroke-dasharray: 0;
+            stroke-width: 2;
+            }
+
+            #connectors {
+            stroke: #FFC760;
+            stroke-dasharray: 0;
+            stroke-width: 3;
+            }
+
+            #rating_tab {
+
+            }
+
+		</style>
+{% endblock %}
+
+{% block main %}
+
+<body>
+    <button id="profile">Player : {{information[0]}}</button>
+	<button id="rating">Rating : {{information[1]}}</button>
+	<button id="consistency">Consistency : {{information[2]}}</button>
+	<div id = "rating_tab" style = "
+	    display: none;
+	">
+        <div id = "big_rating">
+            {{information[1]}}
+        </div>
+
+        <div id = "progress" style="
+            display: none;
+        ">
+        	{{progress}} </div>
+        <div id="stats" style="
+            top: 46%;
+            position: absolute;
+            left: 5%;
+            font-size: 1.2em;
+        ">
+        	Rank: #{{rank[0]}} | {{counter}} &nbsp;   Percentile: {{percentile[0]}}% </div>
+
+        <div style="
+             top: 30%;
+             left: 28%;
+             width: 20%;
+             position: absolute;
+             margin-bottom: 5px;
+             background-color: #f1f1f1;
+             height: 12%;
+             ">
+                    </div><div style="
+             top: 56%;
+             left: 28%;
+             width: 20%;
+             position: absolute;
+             margin-bottom: 5px;
+             background-color: #f1f1f1;
+             height: 12%;
+             ">
+                    </div>
+
+        <div style="
+             top: 56%;
+             left: 5%;
+             width: 20%;
+             position: absolute;
+             margin-bottom: 5px;
+             background-color: #f1f1f1;
+             height: 12%;
+             ">
+                    </div>
+
+        <div style="
+             top: 43%;
+             left: 28%;
+             width: 20%;
+             position: absolute;
+             margin-bottom: 5px;
+             background-color: #f1f1f1;
+             height: 12%;
+             ">
+                    </div>
+
+
+        <div style="
+            top: 31.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 0.9em;
+        ">
+        	Highest Rating </div>
+        <div id = "high" style="
+            top: 34.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 1.8em;
+            font-weight: 450;
+        ">
+        	{{extra_info[0]}} </div><div style="
+            top: 36.5%;
+            position: absolute;
+            left: 39%;
+            font-size: 0.9em;
+            font-weight: 100;
+        ">
+        	{{dates[1]}}
+        </div>
+
+
+        <div  style="
+            top: 44.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 0.9em;
+        ">
+        	Lowest Rating </div>
+
+
+
+        <div id = "low" style="
+            top: 47.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 1.8em;
+            font-weight: 450;
+        ">
+        	{{extra_info[1]}} </div>
+
+        <div style="
+            top: 49.5%;
+            position: absolute;
+            left: 39%;
+            font-size: 0.9em;
+            font-weight: 100;
+        ">
+        	{{dates[2]}}
+        </div><div style="
+            top: 57.5%;
+            position: absolute;
+            left: 7%;
+            font-size: 0.9em;
+        ">
+        	Best Win : {{extra_info[3]}} </div><div style="
+            top: 60.5%;
+            position: absolute;
+            left: 7%;
+            font-size: 1.8em;
+            font-weight: 450;
+        ">
+        	{{extra_info[2]}} </div><div style="
+            top: 62.5%;
+            position: absolute;
+            left: 16%;
+            font-size: 0.9em;
+            font-weight: 100;
+        ">
+        	{{dates[3]}}
+        </div><div style="
+            top: 57.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 0.9em;
+        ">
+        	Average Opponent Rating </div><div style="
+        	top: 60.5%;
+        	position: absolute;
+        	left: 30%;
+        	font-size: 1.8em;
+        	font-weight: 450;
+        ">
+        	{{avg_opp_rating[3]}}</div>
+
+        <div style="
+            top: 75%;
+            position: absolute;
+            left: 5%;
+            font-size: 0.9em;
+        ">
+        	Average Opponent Rating </div><div style="
+             top: 80%;
+             left: 5%;
+             width: 12%;
+             position: absolute;
+             border-radius: 4px;
+             margin-bottom: 5px;
+             background-color: #769656;
+             height: 10%;
+
+
+            ">
+
+
+        <div style="
+            color: black;
+            font-weight: 450;
+            font-size: 1.2em;
+            text-align: center;
+            vertical-align: middle;
+            position: relative;
+            top: 25%;
+            ">
+        	Win: {{avg_opp_rating[0]}} </div>
+
+
+
+        <div></div></div>
+
+        <div style="
+             top: 80%;
+             left: 19%;
+             width: 12%;
+             position: absolute;
+             border-radius: 4px;
+             margin-bottom: 5px;
+             background-color: #b33430;
+             height: 10%;
+            ">
+
+
+        <div style="
+            color: black;
+            font-weight: 450;
+            font-size: 1.2em;
+        	vertical-align: middle;
+            text-align: center;
+            position: relative;
+            top: 25%;
+
+            ">
+        	Lose: {{avg_opp_rating[1]}}
+        </div>
+
+
+
+
+        <div></div></div>
+
+        <div style="
+             top: 80%;
+             left: 33%;
+             width: 12%;
+             position: absolute;
+             border-radius: 4px;
+             margin-bottom: 5px;
+             background-color: #a7a6a2;
+             height: 10%;
+            ">
+
+
+        <div style="
+            color: black;
+            font-weight: 450;
+            font-size: 1.2em;
+        	vertical-align: middle;
+            text-align: center;
+            position: relative;
+            top: 25%;
+            ">
+        	Draw: {{avg_opp_rating[2]}}
+        </div>
+
+        </div>
+
+   </div>
+
+
+	<div id = "con_tab" style = "
+	    display: none;
+	">
+        <div id = "big_con">
+            {{information[2]}}
+        </div>
+
+        <div id="c_stats" style="
+            top: 46%;
+            position: absolute;
+            left: 5%;
+            font-size: 1.2em;
+        ">
+        	Rank: #{{rank[1]}} | {{counter}} &nbsp;   Percentile: {{percentile[1]}}% </div>
+   </div>
+
+	<div id = "profile_tab" style = "
+	    display: none;
+	">
+        <div id = "big_prof_r">
+            {{information[1]}}
+        </div>
+
+        <div id = "big_prof_c">
+            {{information[2]}}
+        </div>
+
+        <div id="p_stats" style="
+            top: 63%;
+            position: absolute;
+            left: 5%;
+            font-size: 1.2em;
+        ">
+        	Joined {{dates[0]}} </div>
+
+           <div style="
+             top: 30%;
+             left: 28%;
+             width: 20%;
+             position: absolute;
+             margin-bottom: 5px;
+             background-color: #f1f1f1;
+             height: 12%;
+             ">
+                    </div><div style="
+             top: 56%;
+             left: 28%;
+             width: 20%;
+             position: absolute;
+             margin-bottom: 5px;
+             background-color: #f1f1f1;
+             height: 12%;
+             ">
+                    </div>
+
+        <div style="
+             top: 43%;
+             left: 28%;
+             width: 20%;
+             position: absolute;
+             margin-bottom: 5px;
+             background-color: #f1f1f1;
+             height: 12%;
+             ">
+                    </div>
+
+
+        <div style="
+            top: 31.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 0.9em;
+        ">
+        	Rating </div>
+        <div id = "high" style="
+            top: 34.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 1.8em;
+            font-weight: 450;
+        ">
+        	#{{rank[0]}} | {{counter}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{percentile[0]}}%</div>
+
+
+        <div  style="
+            top: 44.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 0.9em;
+        ">
+        	Consistency </div>
+
+
+
+        <div id = "low" style="
+            top: 47.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 1.8em;
+            font-weight: 450;
+        ">
+            #{{rank[1]}} | {{counter}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{percentile[1]}}%</div>
+    <div style="
+            top: 57.5%;
+            position: absolute;
+            left: 30%;
+            font-size: 0.9em;
+        ">
+        	Games Played </div><div style="
+        	top: 60.5%;
+        	position: absolute;
+        	left: 30%;
+        	font-size: 1.8em;
+        	font-weight: 450;
+        ">
+        	#{{rank[2]}} | {{counter}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{percentile[2]}}%</div>
+
+        <div style="
+            top: 73%;
+            position: absolute;
+            left: 5%;
+            font-size: 1.2em;
+        ">
+        	Total Games Played : {{results[3]}} </div><div style="
+             top: 80%;
+             left: 5%;
+             width: 12%;
+             position: absolute;
+             border-radius: 4px;
+             margin-bottom: 5px;
+             background-color: #769656;
+             height: 10%;
+
+
+            ">
+
+
+        <div style="
+            color: black;
+            font-weight: 450;
+            font-size: 1.2em;
+            text-align: center;
+            vertical-align: middle;
+            position: relative;
+            top: 25%;
+            ">
+        	Win: {{results[0]}} </div>
+
+
+
+        <div></div></div>
+
+        <div style="
+             top: 80%;
+             left: 19%;
+             width: 12%;
+             position: absolute;
+             border-radius: 4px;
+             margin-bottom: 5px;
+             background-color: #b33430;
+             height: 10%;
+            ">
+
+
+        <div style="
+            color: black;
+            font-weight: 450;
+            font-size: 1.2em;
+        	vertical-align: middle;
+            text-align: center;
+            position: relative;
+            top: 25%;
+
+            ">
+        	Lose: {{results[1]}}
+        </div>
+
+
+
+
+        <div></div></div>
+
+        <div style="
+             top: 80%;
+             left: 33%;
+             width: 12%;
+             position: absolute;
+             border-radius: 4px;
+             margin-bottom: 5px;
+             background-color: #a7a6a2;
+             height: 10%;
+            ">
+
+
+        <div style="
+            color: black;
+            font-weight: 450;
+            font-size: 1.2em;
+        	vertical-align: middle;
+            text-align: center;
+            position: relative;
+            top: 25%;
+            ">
+        	Draw: {{results[2]}}
+        </div>
+
+        </div>
+
+      </div>
+
+
+
+
+
+
+    <div id = "chart" style="
+         top: 30%;
+         left: 50%;
+         width: 45%;
+         position: absolute;
+         margin-bottom: 5px;
+         background-color: #f1f1f1;
+         height: 60%;
+         ">
+
+
+    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
+      <title id="title">Rating Chart</title>
+    <g class="grid x-grid" id="xGrid">
+      <line x1="0%" x2="0%" y1="0%" y2="100%"></line>
+    </g>
+    <g class="grid y-grid" id="yGrid">
+      <line x1="0%" x2="100%" y1="100%" y2="100%"></line>
+    </g>
+
+    <g class="grid y-grid" id="lines">
+
+    </g>
+
+    <g class="grid y-grid" id="connectors">
+
+    </g>
+
+    <g class="labels y-labels" id = "y-axis">
+    </g>
+    <g class="data" data-setname="" id = data>
+
+    </g>
+    </svg>
+
+                </div>
+    <div id = "x-axis-labels">
+    <div style="
+         top: 92%;
+         left: 53%;
+         position: absolute;
+         ">
+        4 Weeks
+       </div>
+    </body>
+
+    <div style="
+         top: 92%;
+         left: 63%;
+         position: absolute;
+         ">
+        3 Weeks
+       </div>
+    </body>
+
+    <div style="
+         top: 92%;
+         left: 73%;
+         position: absolute;
+         ">
+        2 Weeks
+       </div>
+    </body>
+
+    <div style="
+         top: 92%;
+         left: 83%;
+         position: absolute;
+         ">
+        1 Week
+       </div>
+    </div>
+
+<div id="piechart" style="
+         top: 25%;
+         left: 47%;
+         position: absolute;
+         display: "";
+         "
+></div>
+<div id="game_info" style="
+         display: none;
+         "
+>{{results[0]}}, {{results[1]}}, {{results[2]}}</div>
+
+<script src = "../static/analysis.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+</body>
+{% endblock %}
+
+
+

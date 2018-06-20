@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" id="search" placeholder="Search" type="text"/>
+    </div>
+    <br>
+
+    <table class="table" id = "complete_table">
+        <thead>
+            <tr>
+                <th>
+                    Rank
+                </th>
+                <th>
+                    Player ({{counter}})
+                </th>
+                <th id = "rating1">
+                    Rating ({{averages[0]}})
+                </th>
+                <th id = "consistency1">
+                    Consistency ({{averages[2]}})
+                </th>
+                <th id = "gp1">
+                    Games Played ({{averages[1]}})
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in information %}
+            {% set outer_loop = loop %}
+            <tr>
+                    <td>
+                        {{loop.index}}
+                    </td>
+                {% for info in player %}
+                    <td>
+                        {{information[outer_loop.index0][loop.index0]}}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        <table class="table" id = "consistency_table">
+        <thead>
+            <tr>
+                <th>
+                    Rank
+                </th>
+                <th>
+                    Player ({{counter}})
+                </th>
+                <th id = "rating2">
+                    Rating ({{averages[0]}})
+                </th>
+                <th id = "consistency2">
+                    Consistency ({{averages[2]}})
+                </th>
+                <th id = "gp2">
+                    Games Played ({{averages[1]}})
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in consistency_table %}
+            {% set outer_loop = loop %}
+            <tr>
+                {% for info in player %}
+                    <td>
+                        {{consistency_table[outer_loop.index0][loop.index0]}}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </table>
+        <table class="table" id = "gp_table">
+        <thead>
+            <tr>
+                <th>
+                    Rank
+                </th>
+                <th>
+                    Player ({{counter}})
+                </th>
+                <th id = "rating3">
+                    Rating ({{averages[0]}})
+                </th>
+                <th id = "consistency3">
+                    Consistency ({{averages[2]}})
+                </th>
+                <th id = "gp3">
+                    Games Played ({{averages[1]}})
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in gp_table %}
+            {% set outer_loop = loop %}
+            <tr>
+                {% for info in player %}
+                    <td>
+                        {{gp_table[outer_loop.index0][loop.index0]}}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src = "../static/myScript.js"></script>
+{% endblock %}

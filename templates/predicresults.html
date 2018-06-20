@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Prediction
+{% endblock %}
+
+{% block main %}
+
+<div id = "stat" style="
+            display: none">
+    	{{probabilities[0]}}</div>
+
+
+<div style="
+            font-weight: 600;
+            font-size: 2.5em;
+            position: absolute;
+            left: 10%;
+            color: #0F52BA;">
+    	{{probabilities[0]}}%</div>
+    <div style="
+            font-weight: 600;
+            font-size: 2.5em;
+            position: absolute;
+            right: 10%;
+            color: 	#FF9966;">
+{{probabilities[1]}}%</div>
+
+    <div id="bar" style="
+                         position: relative;
+                         transform: translate(0, 3em);
+                         width: 100%;                          height: 2.5em;                      background: linear-gradient(to right, rgb(15, 82, 186) 38%, rgb(255, 153, 102) 38%);                          text-align:  center;                          left: 0%;                          /* left: 50px; */                          width: calc(100%);
+                         "></div>
+
+ <div style="
+            font-weight: 400;
+            font-size: 1.5em;
+            position: fixed;
+            top: 9em;
+            left: 10%;
+            ">
+    	Akshay : 1191.2 </div>
+
+<div style="
+            font-weight: 400;
+            font-size: 1.5em;
+            position: fixed;
+            top: 9em;
+            right: 10%;
+            ">
+    	Daniel : 1276.0 </div>
+
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <table class="table" id = "history_table" style = "transform: (0%, ">
+        <thead>
+            <tr>
+                <th>
+                    Game ({{total}})
+                </th>
+                <th>
+                    Player One
+                </th>
+                <th>
+                    Rating &#916
+                </th>
+                <th>
+                    New Rating
+                </th>
+                <th>
+                    Consistency
+                </th>
+                <th>
+                    Player Two
+                </th>
+                <th>
+                    Rating &#916
+                </th>
+                <th>
+                    New Rating
+                </th>
+                <th>
+                    Consistency
+                </th>
+                <th>
+                    Result
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in history_table %}
+            {% set outer_loop = loop %}
+            <tr>
+                <td>
+                    {{total - (loop.index - 1)}}
+                </td>
+                {% for info in game %}
+                    <td>
+                        {{history_table[outer_loop.index0][loop.index0]}}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src = "../static/predicresults.js"></script>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Player
+{% endblock %}
+
+{% block main %}
+    <form action="/player" method="post" style = "position: absolute; top: 20%; left: 20%;">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="player" placeholder="Name" type="text"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+    <form action="/player" method="post" style = "position: absolute; top: 20%; right: 20%;">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="remove_player" placeholder="Name" type="text"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Remove</button>
+    </form>
+{% endblock %}
