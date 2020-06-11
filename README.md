@@ -1,4 +1,4 @@
-# OmniElo
+# Elo
 
 A web application for users to create and maintain their own elo rating system. It can be used amongst friends or acquitances for any 1 vs 1 activity, such as ping-pong, video games, or poker. 
 
