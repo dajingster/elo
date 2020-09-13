@@ -1,6 +1,6 @@
 # Elo
 
-A web application for users to create and maintain their own elo rating system. It can be used amongst friends or acquitances for any 1 vs 1 activity, such as ping-pong, video games, or poker. 
+A web application for users to create and maintain their own Elo rating system. It can be used amongst friends or acquitances for any 1 vs 1 activity, such as ping-pong, video games, or poker. 
 
 As a competitive chess player, this was inspired by the chess rating system. The algorithm behind it is virtually the same albeit less complicated regarding provisional players who just enter the system. 
 
@@ -8,9 +8,9 @@ As a competitive chess player, this was inspired by the chess rating system. The
 
 ### Description
 
-For every player in the system, the two basic statistics are their lo (rating) and their consistency. elo follows the traditional system and is a measurement of a player's skill. The higher the elo the better they are. For a more in-depth description, visit the [Wikipedia page](https://en.wikipedia.org/wiki/Elo_rating_system). The one place where the algorithms used differ from traditional elo systems is in provisional elo, the elo when a player has just been entered into the system and has played only a few games. Traditional systems treat allow provisional elos to fluctuate more, whereas my implemention removes this complexity.
+For every player in the system, the two basic statistics are their lo (rating) and their consistency. Elo follows the traditional system and is a measurement of a player's skill. The higher the Elo the better they are. For a more in-depth description, visit the [Wikipedia page](https://en.wikipedia.org/wiki/Elo_rating_system). The one place where the algorithms used differ from traditional Elo systems is in provisional Elo, the Elo when a player has just been entered into the system and has played only a few games. Traditional systems treat allow provisional Elos to fluctuate more, whereas my implemention removes this complexity.
 
-A player's "consistency" is also measured, a metric that is not present in elo. Consistency is a measurement of how much a player's results deviate from their elo's prediction. It ranges from 0 to 1 and is calculated by subtracting the average of the difference between a player's actual performance and their expected performance over the previous 5 games from 1. If a player always performs precisely at what their elo indicates, they have a consistency close to 1, and if a player always performs either much better or worse, they have a consistency closer to 0. 
+A player's "consistency" is also measured, a metric that is not present in Elo. Consistency is a measurement of how much a player's results deviate from their Elo's prediction. It ranges from 0 to 1 and is calculated by subtracting the average of the difference between a player's actual performance and their expected performance over the previous 5 games from 1. If a player always performs precisely at what their Elo indicates, they have a consistency close to 1, and if a player always performs either much better or worse, they have a consistency closer to 0. 
 
 ### Usage
 
@@ -33,10 +33,9 @@ Finally, go to the change password tab if you would like to change the password 
 If you find issues, or simply want to contribute improvements, please feel free to clone, modify, test and send pull requests. You may also report issues in the Issues tab of the repository on Github. Any feedback is greatly appreciated on any part of the application. 
 
 ### Potential Features
-  1. Allowing users to choose their own K-factor for elo calculations
+  1. Allowing users to choose their own K-factor for Elo calculations
   2. Have up and down arrows on the index page to see how recent results have impacted rankings
   3. Introduce the option to remove a user account
-  
   
 ### Future Ideas
 
