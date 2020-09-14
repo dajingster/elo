@@ -1,6 +1,6 @@
 # Elo
 
-A web application for users to create and maintain their own Elo rating system. It can be used amongst friends or acquitances for any 1 vs 1 activity, such as ping-pong, video games, or poker. 
+The inspiration was a web application with an Elo rating system to be used amongst friends or acquitances for any 1 vs 1 activity, such as ping-pong, video games, or poker. 
 
 As a competitive chess player, this was inspired by the chess rating system. The algorithm behind it is virtually the same albeit less complicated regarding provisional players who just enter the system. 
 
